@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog App</title>
+</head>
+<body>
+    
+        <header>
+            <nav>
+                <div>
+                    <a href="{% url 'home' %}">Home</a>
+                    <a href="{%%}">create post</a>
+                </div>
+            </nav>
+        </header>
+
+        <main>
+
+            {% block content %}
+            {% endblock content %}
+
+        </main>
+
+        <footer>
+            <div>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum explicabo, dolores obcaecati ducimus deserunt iste officiis amet. Debitis repellendus deleniti, cupiditate minima eaque et aut unde ipsa ut laboriosam consectetur! </p>
+            </div>
+        </footer>
+
+</body>
+</html>
