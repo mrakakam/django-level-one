@@ -3,9 +3,8 @@ from django.http import HttpResponse
 from .models import Post
 
 def home(request):
-
-    posts = post.objects.all().order_by('created_at')
-    return render(request, 'myapp/home.html', {'posts': posts})   # the {'posts': posts})  is passed as dictionary to the template
+    posts = Post.objects.all().order_by('created_at')
+    return render(request, 'posts/home.html', {'posts': posts})   # the {'posts': posts})  is passed as dictionary to the template
 
 
 def post_create(request) :
@@ -21,7 +20,7 @@ def post_create(request) :
 
 def post_details(request,pk):
     post = get_object_or_404(Post, pk=pk)
-    return render(request,'post/post_detail.html', {'post': post})
+    return render(request,'posts/post_detail.html', {'post': post})
 
 
 def post_edit(request,pk):

@@ -1,0 +1,39 @@
+{% extends 'posts/base.html' %}
+{% block content %}
+
+<div class="max-w-lg mx-auto mt-24 bg-white shadow-xl rounded-2xl p-10 text-center border border-gray-100">
+  <!-- Header -->
+  <div class="mb-6">
+    <h1 class="text-4xl font-extrabold text-red-600 mb-2">Delete Post</h1>
+    <p class="text-gray-600">
+      This action <span class="font-semibold text-red-500">cannot be undone</span>.  
+      Are you sure you want to permanently delete this post?
+    </p>
+  </div>
+
+  <!-- Post Preview -->
+  <div class="bg-gray-50 border border-gray-200 p-5 rounded-xl mb-8 text-left">
+    <h3 class="text-lg font-bold text-gray-800 mb-2">{{ post.title }}</h3>
+    <p class="text-gray-600 text-sm leading-relaxed">
+      {{ post.content|truncatewords:25 }}
+    </p>
+  </div>
+
+  <!-- Form Buttons -->
+  <form method="POST" class="flex justify-center gap-5">
+    {% csrf_token %}
+    <button 
+      type="submit"
+      class="bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition">
+      🚨 Yes, Delete It
+    </button>
+
+    <a 
+      href="{% url 'home' %}"
+      class="bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold py-3 px-8 rounded-lg border border-gray-300 transition">
+      Cancel
+    </a>
+  </form>
+</div>
+
+{% endblock %}

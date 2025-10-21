@@ -1,32 +1,79 @@
-   {% extend 'myapp/base.html'%}
+{% extends 'posts/base.html' %}
+{% block content %}
+<script src="https://cdn.tailwindcss.com"></script>
 
-   {% block content %}
-   <h2>my blogy app</h2>
-   {% if posts%}
-      <p>No posts available</p>
+<!-- 🌿 Page Container -->
+<div class="min-h-screen bg-gray-50 text-gray-900 flex flex-col">
 
-         <div>
-         {% for post in posts%}
+  <!-- 🌟 Hero Section -->
+  <header class="bg-gradient-to-r from-blue-700 via-indigo-700 to-purple-700 text-white py-16 mb-12 shadow-xl">
+    <div class="max-w-5xl mx-auto text-center px-4">
+      <h1 class="text-4xl md:text-5xl font-extrabold mb-3 tracking-tight">📝 My Blogy App</h1>
+      <p class="text-lg md:text-xl text-blue-100">
+        Stories, thoughts, and creative ideas — all in one place 💭
+      </p>
+      <div class="mt-8">
+        <a href="{% url 'post_create' %}" 
+           class="bg-white text-blue-700 font-semibold px-6 py-3 rounded-full shadow-md hover:bg-blue-50 hover:shadow-lg transition">
+          ✏️ Write a Post
+        </a>
+      </div>
+    </div>
+  </header>
 
-         <div>
-            <h2>{{post.title}}</h2>
-            <p>{{post.created_at|date:'F J, Y'}}</p>
-            <p>{{post.content|truncateword:30}}</p>
-            <a href="{% url 'post_detail ' post.pk%}">read more</a>
-         </div>
+  <!-- 📰 Blog Post Grid -->
+  <main class="flex-1 max-w-6xl mx-auto px-4 md:px-8">
+    {% if posts %}
+      <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+        {% for post in posts %}
+          <article class="bg-white rounded-2xl shadow-md hover:shadow-2xl transition-transform duration-300 hover:-translate-y-1 overflow-hidden">
+            
+            <!-- Header Image Placeholder -->
+            <div class="h-48 bg-gradient-to-br from-blue-200 to-indigo-300"></div>
+            
+            <!-- Content -->
+            <div class="p-6">
+              <h2 class="text-2xl font-semibold text-gray-800 mb-2 hover:text-blue-600 transition">
+                {{ post.title }}
+              </h2>
 
-         {%endfor%}
-      
+              <p class="text-sm text-gray-500 mb-4">
+                {{ post.created_at|date:"F j, Y" }}
+              </p>
 
+              <p class="text-gray-700 mb-6 leading-relaxed">
+                {{ post.content|truncatewords:25 }}
+              </p>
 
+              <a href="{% url 'post_detail' post.pk %}"
+                 class="inline-flex items-center text-blue-600 font-medium hover:text-blue-800 transition">
+                Read more 
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 ml-1">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                </svg>
+              </a>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
 
+    {% else %}
+      <!-- 😕 Empty State -->
+      <div class="text-center py-20">
+        <h2 class="text-2xl font-bold text-gray-700 mb-4">No posts yet</h2>
+        <p class="text-gray-500 mb-6">Start your blogging journey today and share your first story!</p>
+        <a href="{% url 'post_create' %}"
+           class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-lg font-medium shadow-md transition">
+          ✨ Create Your First Post
+        </a>
+      </div>
+    {% endif %}
+  </main>
 
-      
-         </div>
-   {% else %}
-         <div>
-            <h2>no post</h2>
-            <a href="{% url post_create %}"></a>
-         </div>
+  <!-- 🌈 Footer -->
+  <footer class="mt-20 py-6 text-center text-gray-500 border-t">
+    <p>© {{ now|date:"Y" }} <span class="font-semibold text-blue-600">My Blogy App</span> — Built with ❤️ and Django</p>
+  </footer>
 
-   {% endblock content %}
+</div>
+{% endblock %}

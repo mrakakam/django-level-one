@@ -1,0 +1,30 @@
+{% extends 'posts/base.html' %}
+{% block content %}
+
+<!-- Add Tailwind CDN if not already in base.html -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<div class="max-w-3xl mx-auto mt-12 bg-white shadow-lg rounded-2xl p-8">
+  <!-- Post Title -->
+  <h1 class="text-4xl font-bold text-gray-900 mb-4 text-center">
+    {{ post.title }}
+  </h1>
+
+  <!-- Post Date -->
+  <p class="text-sm text-gray-500 text-center mb-8">
+    Created at {{ post.created_at|date:"M d, Y" }}
+  </p>
+
+  <!-- Post Content -->
+  <div class="prose prose-lg text-gray-800 leading-relaxed mb-8">
+    {{ post.content|linebreaks }}
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="flex justify-center gap-4">
+    <a href="{% url 'post_edit' post.pk %}" 
+       class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold px-5 py-2 rounded-lg transition">
+      Edit Post
+    </a>
+
+    <a href="{% url 'post_delete' post.pk_
